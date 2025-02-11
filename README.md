@@ -27,6 +27,6 @@ Ce script se charge de convertir la solution satisfiable en un fichier midi
 Pour générer votre propre musique à l'aide d'un solveur SAT, il faut :
 
 - exécuter `synth.py`
-- dans le terminal (:warning: exécuter en tant qu'administrateur :warning:), exécuter la commande : `gophersat_win64 music.cnf > solution.txt`
+- dans le terminal ( :warning: exécuter en tant qu'administrateur :warning: ), exécuter la commande : `gophersat_win64 music.cnf > solution.txt`
 - exécuter `gen.py`
 - exécuter `play.py`
