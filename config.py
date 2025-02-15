@@ -1,4 +1,5 @@
-# config.py
+# config file
+
 class MusicConfig:
     TOTAL_NOTES = 7  # Notes possibles : Do, Ré, Mi, Fa, Sol, La, Si
     TOTAL_STEPS = 8  # Nombre de temps
