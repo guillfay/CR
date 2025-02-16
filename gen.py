@@ -37,11 +37,3 @@ def generate_midi(melody):
     
     midi.save('output.mid')
     print("✅ Fichier MIDI généré : output.mid")
-
-
-
-
-with open("solution.txt", "r", encoding='utf-16') as f:  # Spécifier l'encodage UTF-16
-    solution_text = f.read()
-melody = parse_solution(solution_text)
-generate_midi(melody)

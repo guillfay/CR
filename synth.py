@@ -56,7 +56,3 @@ def generate_cnf():
             f.write(" ".join(map(str, clause)) + " 0\n")
     
     print("✅ Fichier CNF généré avec règles musicales avancées")
-
-
-
-generate_cnf()
