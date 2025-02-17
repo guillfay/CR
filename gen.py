@@ -25,6 +25,8 @@ def parse_solution(solution_text):
     return melody
 
 def generate_midi(melody):
+    midi = MidiFile(type=1)  # Type 1 : plusieurs pistes indépendantes
+
     print("🎵 Notes générées :", melody)
 
     midi = MidiFile()
@@ -34,25 +36,21 @@ def generate_midi(melody):
     for i in range(MusicConfig.TOTAL_INSTRUMENTS):
         tracks[i] = MidiTrack()
         midi.tracks.append(tracks[i])
-        tracks[i].append(Message('program_change', program=instruments[i], time=0))
+        tracks[i].append(Message('program_change', program=instruments[i], time=0, channel=i))
 
     for t in range(MusicConfig.TOTAL_STEPS):
         for i in range(MusicConfig.TOTAL_INSTRUMENTS):
             note = melody[i][t]
             if note is not None:
-                if i == 1:  # Cor : notes plus longues
-                    tracks[i].append(Message('note_on', note=note, velocity=64, time=80))
-                    tracks[i].append(Message('note_off', note=note, velocity=64, time=180))  # Durée plus longue légèrement
-                else:  # Piano
-                    tracks[i].append(Message('note_on', note=note, velocity=64, time=80))
-                    tracks[i].append(Message('note_off', note=note, velocity=64, time=160))
+                tracks[i].append(Message('note_on', note=note, velocity=64, time=0, channel=i))
+                tracks[i].append(Message('note_off', note=note, velocity=64, time=160, channel=i))
             else:
                 # Si la note est None, ajouter un délai pour respecter le rythme
-                if i == 1:  # Violon : temps de silence
-                    tracks[i].append(Message('note_off', note=0, velocity=0, time=160))  # Silence
+                tracks[i].append(Message('note_off', note=0, velocity=0, time=160, channel=i))  # Silence
 
     midi.save('output.mid')
     print("✅ Fichier MIDI généré avec plusieurs instruments !")
+
 
 with open("solution.txt", "r", encoding="utf-8") as f:
     solution_text = f.read()
