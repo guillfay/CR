@@ -1,9 +1,21 @@
 # config.py
+
 class MusicConfig:
-    TOTAL_NOTES = 7  # Notes possibles : Do, Ré, Mi, Fa, Sol, La, Si
     TOTAL_STEPS = 8  # Nombre de temps
-    NOTE_MAPPING = [60, 62, 64, 65, 67, 69, 71]  # MIDI notes (C4 to B4)
-    STYLE = "electro"  # Changer ici pour tester différents styles
+
+    # Dictionnaire des styles avec les notes correspondantes
+    STYLES = {
+        "classical": [60, 62, 64, 65, 67, 69, 71],  # Do, Ré, Mi, Fa, Sol, La, Si
+        "jazz": [60, 62, 64, 65, 67, 69, 71, 73, 74],  # Extensions (9e, 11e)
+        "blues": [60, 62, 63, 64, 65, 67, 68, 69, 71],  # Blue notes (63 = Mib, 68 = Lab)
+        "electro": [60, 62, 64, 65, 67, 69, 71]  # Notes classiques (peut être modifié)
+    }
+
+    # Choix du style
+    STYLE = "jazz"  # Modifier ici pour tester différents styles
+
+    NOTE_MAPPING = STYLES[STYLE]
+    TOTAL_NOTES = len(NOTE_MAPPING)
 
     @classmethod
     def num_vars(cls):

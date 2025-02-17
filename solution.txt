@@ -1,2 +1,1 @@
-c solving music.cnf
-s UNSATISFIABLE
+c solving music.opb
