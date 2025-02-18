@@ -1,29 +1,51 @@
 import subprocess
+import os
 
 # Étape 1️⃣ : Générer le fichier CNF (synth.py)
 print("🔹 Génération du fichier CNF...")
 subprocess.run(["python", "synth.py"], check=True)
 
-# Étape 2️⃣ : Exécuter Gophersat pour résoudre le CNF
-print("🔹 Résolution SAT avec Gophersat...")
-gophersat_cmd = ["./gophersat_win64", "music.cnf"]
-with open("solution.txt", "w", encoding="utf-8") as solution_file:
-    subprocess.run(gophersat_cmd, stdout=solution_file, check=True)
+# Limite de tentatives
+max_attempts = 50
+attempt = 0
+solution_found = False
 
+while not solution_found and attempt < max_attempts:
+    attempt += 1
+    print(f"🔹 Tentative #{attempt} de résolution SAT avec Gophersat...")
 
+    # Supprimer le fichier solution.txt précédent pour une nouvelle tentative propre
+    if os.path.exists("solution.txt"):
+        os.remove("solution.txt")
 
-# Vérifier si aucune solution n'a été trouvée
-with open("solution.txt", "r", encoding="utf-8") as f:
-    if "UNSATISFIABLE" in f.read():
-        print("❌ Aucune solution trouvée par le SAT solver !")
+    # Exécuter Gophersat pour résoudre le CNF
+    gophersat_cmd = ["./gophersat_win64", "music.cnf"]
+    with open("solution.txt", "w", encoding="utf-8") as solution_file:
+        subprocess.run(gophersat_cmd, stdout=solution_file, check=True)
 
-    else:
-        # Étape 3️⃣ : Générer le fichier MIDI (gen.py)
-        print("🔹 Génération du fichier MIDI...")
-        subprocess.run(["python", "gen.py"], check=True)
+    # Vérifier si une solution a été trouvée
+    with open("solution.txt", "r", encoding="utf-8") as f:
+        if "UNSATISFIABLE" in f.read():
+            print(f"❌ Aucune solution trouvée par le SAT solver (tentative #{attempt}) !")
+        else:
+            solution_found = True
+            print("✅ Solution trouvée !")
 
-        # Étape 4️⃣ : Jouer le fichier MIDI (play.py)
-        print("🔹 Lecture du fichier MIDI...")
-        subprocess.run(["python", "play.py"], check=True)
+    # Ré-générer le fichier CNF pour la prochaine tentative
+    if not solution_found:
+        print("🔄 Réinitialisation du problème CNF pour la prochaine tentative...")
+        subprocess.run(["python", "synth.py"], check=True)
 
-        print("✅ Processus terminé avec succès ! 🎶")
+# Si une solution a été trouvée, procéder aux étapes suivantes
+if solution_found:
+    # Étape 3️⃣ : Générer le fichier MIDI (gen.py)
+    print("🔹 Génération du fichier MIDI...")
+    subprocess.run(["python", "gen.py"], check=True)
+
+    # Étape 4️⃣ : Jouer le fichier MIDI (play.py)
+    print("🔹 Lecture du fichier MIDI...")
+    subprocess.run(["python", "play.py"], check=True)
+
+    print("✅ Processus terminé avec succès ! 🎶")
+else:
+    print("❌ Échec de la résolution SAT après 15 tentatives.")

@@ -2,7 +2,7 @@
 
 class MusicConfig:
     TOTAL_NOTES = 7  # Do majeur : C, D, E, F, G, A, B
-    TOTAL_STEPS = 10  # Nombre de temps
+    TOTAL_STEPS = 30  # Nombre de temps
 
     # Notes MIDI : deux pianos en Do majeur (octave 4)
     NOTE_MAPPING = [
