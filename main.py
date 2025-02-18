@@ -4,12 +4,31 @@ import subprocess
 print("🔹 Génération du fichier CNF...")
 subprocess.run(["python", "synth.py"], check=True)
 
-# Étape 2️⃣ : Exécuter Gophersat pour résoudre le CNF
-print("🔹 Résolution SAT avec Gophersat...")
-gophersat_cmd = ["./gophersat_win64", "music.cnf"]
-with open("solution.txt", "w", encoding="utf-8") as solution_file:
-    subprocess.run(gophersat_cmd, stdout=solution_file, check=True)
+solver='PB'
 
+if solver == 'SAT':
+    
+    # Étape 1️⃣ : Générer le fichier CNF (synth.py)
+    print("🔹 Génération du fichier CNF...")
+    subprocess.run(["python", "synth.py"], check=True)
+
+    # Étape 2️⃣ : Exécuter Gophersat pour résoudre le CNF
+    print("🔹 Résolution SAT avec Gophersat...")
+    gophersat_cmd = ["./gophersat_win64", "music.cnf"]
+    with open("solution.txt", "w", encoding="utf-8") as solution_file:
+        subprocess.run(gophersat_cmd, stdout=solution_file, check=True)
+
+if solver == 'PB':
+
+    # Étape 1️⃣ : Générer le fichier CNF (synth.py)
+    print("🔹 Génération du fichier CNF...")
+    subprocess.run(["python", "synthPB.py"], check=True)
+
+    # Étape 2️⃣ : Exécuter Gophersat pour résoudre le CNF
+    print("🔹 Résolution PB avec Gophersat...")
+    gophersat_cmd = ["./gophersat_win64", "music.opb"]
+    with open("solution.txt", "w", encoding="utf-8") as solution_file:
+        subprocess.run(gophersat_cmd, stdout=solution_file, check=True)
 
 
 # Vérifier si aucune solution n'a été trouvée
