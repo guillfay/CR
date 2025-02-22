@@ -54,26 +54,12 @@ chords = {
 # Progression d'accords aléatoire sur TOTAL_STEPS
 chord_progression = random.choices(list(chords.values()), k=MusicConfig.TOTAL_STEPS)
 
-# Intervalles aléatoires pendant lesquels les instruments jouent ensemble
-n_interv = random.randint(0, MusicConfig.TOTAL_STEPS // 10)
-together_intervals = []
-for _ in range(n_interv):
-    start = random.randint(0, MusicConfig.TOTAL_STEPS // 2)
-    end = start + random.randint(3, max(3, MusicConfig.TOTAL_STEPS // 3))
-    together_intervals.append((start, end))
-
 # Pour chaque instant t pair (et son voisin t+1), on impose l'harmonisation
 for t in range(0, MusicConfig.TOTAL_STEPS - 1, 2):
     chord = chord_progression[t]
     # Pour l'instrument 0 (piano aigu) au temps t, la note doit appartenir à l'accord
     model.addConstr(quicksum(x[t, n, 0] for n in chord) >= 1, name=f"Chord_t{t}_i0")
-    # Pour l'instrument 1 (piano grave) : jouer en même temps ou en décalé selon un intervalle aléatoire
-    in_together = any(start <= t <= end for (start, end) in together_intervals)
-    if in_together:
-        model.addConstr(quicksum(x[t, n, 1] for n in chord) >= 1, name=f"Chord_t{t}_i1")
-    else:
-        if t + 1 < MusicConfig.TOTAL_STEPS:
-            model.addConstr(quicksum(x[t+1, n, 1] for n in chord) >= 1, name=f"Chord_t{t+1}_i1")
+    model.addConstr(quicksum(x[t+1, n, 1] for n in chord) >= 1, name=f"Chord_t{t}_i1")
 
 # ------------------------------------------------------------------------------------
 # (3) Éviter les répétitions trop proches

@@ -11,7 +11,7 @@ attempt = 0
 solution_found = False
 
 # Choisir le type de solveur utilisé pour générer de la musique
-solver_type = 'MILP'
+solver_type = 'MILP' # 'SAT', 'PB', 'MILP'
 
 if solver_type=='SAT':
     while not solution_found and attempt < max_attempts:

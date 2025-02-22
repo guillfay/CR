@@ -25,7 +25,7 @@ model.update()
 for t in range(MusicConfig.TOTAL_STEPS):
     for i in range(MusicConfig.TOTAL_INSTRUMENTS):
         model.addConstr(
-            quicksum(x[t, n, i] for n in range(MusicConfig.TOTAL_NOTES)) == 1,
+            quicksum(x[t, n, i] for n in range(MusicConfig.TOTAL_NOTES)) <= 1,
             name=f"OneNote_t{t}_i{i}"
         )
 
