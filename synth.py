@@ -1,6 +1,5 @@
 # synth.py
 
-import itertools
 from config import MusicConfig
 import random
 

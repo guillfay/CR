@@ -2,7 +2,7 @@
 
 # Installer les packages
 
-Pour installer les bibliothèques python utiles
+Pour installer les bibliothèques python utiles, exécuter la commande suivante
 
 `pip install -r requirements.txt`
 

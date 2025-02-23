@@ -1,3 +1,5 @@
 random
 mido
 pygame
+pygame.midi
+gurobipy
