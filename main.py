@@ -2,7 +2,7 @@ import subprocess
 import os
 
 # Choisir le type de solveur utilisé pour générer de la musique
-solver_type = 'SAT' # 'SAT', 'PB', 'MILP'
+solver_type = 'MILP' # 'SAT', 'PB', 'MILP'
 
 if solver_type=='SAT':
     # Étape 1️⃣ : Générer le fichier CNF (synth.py)

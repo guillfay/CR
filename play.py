@@ -17,3 +17,9 @@ def play_midi(file):
     finally:
         player.close()
         pygame.midi.quit()
+
+
+
+
+# 4. Jouer le MIDI
+play_midi("output.mid")
