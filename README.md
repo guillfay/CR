@@ -1,4 +1,4 @@
-# CR
+# Génération de musique à l'aide de solveurs
 
 # Installer les packages
 
