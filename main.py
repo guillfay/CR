@@ -1,19 +1,19 @@
 import subprocess
 import os
 
-# Étape 1️⃣ : Générer le fichier CNF (synth.py)
-print("🔹 Génération du fichier CNF...")
-subprocess.run(["python", "synth.py"], check=True)
-
-# Limite de tentatives
-max_attempts = 50
-attempt = 0
-solution_found = False
-
 # Choisir le type de solveur utilisé pour générer de la musique
-solver_type = 'MILP' # 'SAT', 'PB', 'MILP'
+solver_type = 'SAT' # 'SAT', 'PB', 'MILP'
 
 if solver_type=='SAT':
+    # Étape 1️⃣ : Générer le fichier CNF (synth.py)
+    print("🔹 Génération du fichier CNF...")
+    subprocess.run(["python", "synth.py"], check=True)
+
+    # Limite de tentatives
+    max_attempts = 50
+    attempt = 0
+    solution_found = False
+
     while not solution_found and attempt < max_attempts:
         attempt += 1
         print(f"🔹 Tentative #{attempt} de résolution SAT avec Gophersat...")
