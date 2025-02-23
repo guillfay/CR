@@ -1,4 +1,6 @@
-# CR
+# Connaissances et raisonnement
+
+*Erwan DAVID - Guillaume FAYNOT*
 
 # Installer les packages
 
@@ -43,3 +45,8 @@ Pour générer votre propre musique à l'aide d'un solveur SAT, il faut :
 
 - renseigner dans `main.py` le type de solveur que vous souhaitez utiliser : SAT, PB ou MILP
 - exécuter `main.py`
+
+# Rapport
+
+- Le rapport précisant le problème traité et la démarche suivie peut être consulté [ici](docs/report.pdf)
+- Un essai sur l'IA hybride comme vu en TD peut-être consulté [ici](docs/IA_hybride_musique.md)
