@@ -1,4 +1,4 @@
-# Connaissances et raisonnement
+# Connaissances et raisonnement - Génération de musique à l'aide de solveurs
 
 *Erwan DAVID - Guillaume FAYNOT*
 
