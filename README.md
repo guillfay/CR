@@ -1,52 +1,52 @@
-# Connaissances et raisonnement - Génération de musique à l'aide de solveurs
+# Knowledge and Reasoning - Music Generation Using Solvers
 
 *Erwan DAVID - Guillaume FAYNOT*
 
-# Installer les packages
+# Install Packages
 
-Pour installer les bibliothèques python utiles, exécuter la commande suivante
+To install the required Python libraries, run the following command:
 
 `pip install -r requirements.txt`
 
 # Gophersat
 
-Sous Windows, la version utilisée est `gophersat_win64`. Ce solveur permet de lire des fichiers `.cnf` et de faire la résolution de problèmes SAT.
+On Windows, the version used is `gophersat_win64`. This solver can read `.cnf` files and solve SAT problems.
 
 # Gurobi
 
-Pour la résolution de problèmes pseudo-booléens et de problèmes de programmation linéaire, nous utilisons gurobi (conformément aux pré-requis du cours de Systèmes de Décisions et Préférences)
+For solving pseudo-Boolean problems and linear programming problems, we use Gurobi (as required by the Decision Systems and Preferences course).
 
-# Structure du code
+# Code Structure
 
-Le code est composé des scripts suivants : 
+The code consists of the following scripts:
 
-- `main.py` : exécute tous les fichiers nécessaires à la génération de musique
+- `main.py`: runs all the necessary files for music generation
 
-    Renseigner en en-tête le type solveur souhaité : SAT, PB ou MILP
+    Specify at the top of the file the desired solver type: SAT, PB, or MILP
 
-- Plusieurs scripts qui font office de synthétiseur :
-    - `synth.py` : génère un fichier cnf nommé `music.cnf`
+- Several scripts act as synthesizers:
+    - `synth.py`: generates a cnf file named `music.cnf`
 
-        Avec quelques paramètres, ce script génère au format cnf des variables et des contraintes SAT pour générer une musique
+        With some parameters, this script generates SAT variables and constraints in cnf format to create music
 
-    - `synthPB.py` : génère un fichier txt contenant la partition solution aux contraintes pseudobooléennes
+    - `synthPB.py`: generates a txt file containing the solution partition for the pseudo-Boolean constraints
 
-    - `synthMILP.py` : génère un fichier txt contenant la partition solution aux contraintes MILP
+    - `synthMILP.py`: generates a txt file containing the solution partition for the MILP constraints
 
-- `gen.py` : utilise un fichier texte `solution.txt` renvoyé par le solveur gophersat ou gurobi et génère un fichier midi nommé `output.mid`
+- `gen.py`: uses a text file `solution.txt` returned by the Gophersat or Gurobi solver and generates a midi file named `output.mid`
 
-    Ce script se charge de convertir la solution satisfiable en un fichier midi
+    This script converts the satisfiable solution into a midi file
 
-- `play.py` : utilise un fichier midi  `output.mid` pour en jouer la musique dans le terminal
+- `play.py`: uses a midi file `output.mid` to play the music in the terminal
 
-# Exécution
+# Execution
 
-Pour générer votre propre musique à l'aide d'un solveur SAT, il faut :
+To generate your own music using a SAT solver, you need to:
 
-- renseigner dans `main.py` le type de solveur que vous souhaitez utiliser : SAT, PB ou MILP
-- exécuter `main.py`
+- specify in `main.py` the type of solver you want to use: SAT, PB, or MILP
+- run `main.py`
 
-# Rapport
+# Report
 
-- Le rapport précisant le problème traité et la démarche suivie peut être consulté [ici](docs/report.pdf)
-- Un essai sur l'IA hybride comme vu en TD peut-être consulté [ici](docs/IA_hybride_musique.md)
+- The report detailing the problem addressed and the approach taken can be found [here](docs/report.pdf)
+- An essay on hybrid AI as discussed in tutorials can be found [here](docs/IA_hybride_musique.md)
